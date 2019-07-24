@@ -1,0 +1,70 @@
+﻿@model AgendaWeb.Models.Agenda
+
+@{
+    ViewBag.Title = "enviarMensaje";
+}
+
+<div class="container">
+    <div class="section">
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                <h2 class="title has-text-centered">Enviar Mensaje a:</h2>
+                <div>
+                    <h4 class="title title is-4 has-text-centered">@Model.email</h4>
+                    <hr />
+
+                    <dl class="dl-horizontal">
+                        <!--De-->
+                        <dt>
+                            @Html.Label("De: ", htmlAttributes: new { @class = "label" })
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Usuario.usuario1)
+                        </dd>
+                        <br />
+
+                        <!--Para-->
+                        <dt>
+                            @Html.Label("Para: ", htmlAttributes: new { @class = "label" })
+                        </dt>
+                        <dd>                          
+                            @Html.DisplayFor(model => model.email)
+                        </dd>
+                        <br />
+
+                        <!--Mensaje-->
+                        <dt>
+                            @Html.Label("Mensaje: ", htmlAttributes: new { @class = "label" })
+                        </dt>
+                        <dd>
+                            <div class="control">
+                                @Html.TextArea("texto", new { @class = "textarea has-fixed-size", @rows = 4 })
+                                @Html.ValidationMessageFor(model => model.direccion, "", new { @class = "text-danger" })
+                            </div>
+                        </dd>
+                        <br />
+                    </dl>
+
+
+                </div>
+
+
+                    <div class="columns">
+                        <div class="column">
+                            @Html.ActionLink("Volver  ", "verAgenda", null, new { @class = "button is-info is-fullwidth" })
+                        </div>
+                        <div class="column">
+                            @Html.ActionLink("Enviar", "Correo", null, new { @class = "button is-success is-fullwidth" })
+                            @*<input type="submit" value="Enviar" class="button is-success is-fullwidth" />*@
+                        </div>
+                    </div>
+                
+
+
+                </div>
+        </div>
+
+    </div>
+</div>
+
+

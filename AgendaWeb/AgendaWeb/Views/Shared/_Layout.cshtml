@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agenda de Contactos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/home/index">
+                <i class="fas fa-chalkboard-teacher fa-2x has-text-primary fa-fw"></i>
+            </a>
+            <a class="navbar-item" href="/home/index"><p class="button is-primary is-inverted"><b>Inicio</b></p></a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div id="navbarBasicExample" class="navbar-end">
+                @if (Session["UserEmail"] != null)
+                {
+                    <div class="navbar-item">
+                        @Html.ActionLink(Session["UserEmail"] + ", logout", "logout", "Home", null, new { @class = "button" })
+                    </div>
+
+                }
+                else
+                {
+                    <div class="navbar-item">
+                        @Html.ActionLink("Registrarse", "registrarse", "Home", null, new { @class = "button is-primary navbar-item" })
+                    </div>
+                    <div class="navbar-item">
+                        @Html.ActionLink("Iniciar Sesion", "login", "Home", null, new { @class = "button is-outlined is-primary navbar-item" })
+                    </div>
+                }
+
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

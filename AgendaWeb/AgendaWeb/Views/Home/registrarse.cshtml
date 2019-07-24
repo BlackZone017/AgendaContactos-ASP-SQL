@@ -1,0 +1,128 @@
+﻿@model AgendaWeb.Models.Usuario
+
+@{
+    /**/
+    ViewBag.Title = "registrarse";
+}
+
+<div class="container">
+    @if (ViewBag.notificacion != null)
+    {
+        <div class="notification is-danger">
+            @ViewBag.notificacion
+        </div>
+
+    }
+    <section class="section">
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+
+                <div class="card">
+                    <div class="has-background-primary">
+                        <p class="title has-text-white" style="padding:30px;">Registrarse</p>
+                    </div>
+                    <div class="card-content">
+
+                        @using (Html.BeginForm("registrarse", "Home", FormMethod.Post))
+                        {
+                            <div class="field">
+                                @Html.Label("Email", new { @class = "label", })
+                                <div class="control">
+                                    @Html.EditorFor(Model => Model.usuario1, new { htmlAttributes = new { @class = "input", @type = "email", @id = "usuario1" } })
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                @Html.Label("Confirmar Email", new { @class = "label", })
+                                <div class="control">
+                                    @Html.Editor("confEmail", new { htmlAttributes = new { @class = "input", @type = "email", @id = "confemail" } })
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                @Html.Label("Contraseña", new { @class = "label" })
+                                <div class="control">
+                                    @Html.EditorFor(Model => Model.password, new { htmlAttributes = new { @class = "input", @type = "password", @id = "pass" } })
+                                </div>
+                            </div>
+                            <div class="field">
+                                @Html.Label("Confirmar Contraseña", new { @class = "label" })
+                                <div class="control">
+                                    @Html.Editor("confContrasena", new { htmlAttributes = new { @class = "input", @type = "password", @id = "confpass" } })
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" id="enviar" class="button is-primary is-fullwidth " disabled>Registrarse</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+@section scripts {
+    <script>
+    var cemail = false;
+    var cpass = false;
+
+    function removeDisabled() {
+        if (cemail && cpass) {
+            $('#enviar').removeAttr("disabled")
+        } else {
+            $('#enviar').attr("disabled")
+        }
+    }
+
+        $('#usuario1').bind('input', function () {
+        if ($(this).val() == $('#confemail').val() && $(this).val() != "") {
+            $('#confemail').removeClass("is-danger")
+            cemail = true;
+        } else {
+            $('#confemail').addClass("is-danger")
+            cemail = false;
+        }
+        removeDisabled();
+    })
+
+    $('#pass').bind('input', function () {
+        if ($(this).val() == $('#confpass').val() && $(this).val() != "") {
+            $('#confpass').removeClass("is-danger")
+            cpass = true;
+        } else {
+            $('#confpass').addClass("is-danger")
+            cpass = false;
+        }
+        removeDisabled();
+    })
+
+    $('#confemail').bind('input', function () {
+
+        if ($(this).val() == $('#usuario1').val() && $(this).val() != "") {
+            $(this).removeClass("is-danger")
+            cemail = true;
+        } else {
+            $(this).addClass("is-danger")
+            cemail = false;
+        }
+        removeDisabled();
+    })
+
+    $('#confpass').bind('input', function () {
+
+        if ($(this).val() == $('#pass').val() && $(this).val() != "") {
+            $(this).removeClass("is-danger")
+            cpass = true;
+        } else {
+            $(this).addClass("is-danger")
+            cpass = false;
+        }
+        removeDisabled();
+    })
+    </script>
+}

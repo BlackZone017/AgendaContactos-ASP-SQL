@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AgendaWeb.Models.Agenda>
+@using AgendaWeb.Models
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    @if (ViewBag.notificacion != null)
+    {
+        <div class="notification is-success">
+            @ViewBag.notificacion
+        </div>
+    }
+
+    @if (Session["UserID"] != null)
+    {
+
+        int split = 3;
+        int total = (int)Math.Ceiling((decimal)Model.Count() / split);
+
+        <section class="section">
+            <h1 class="title is-2 has-text-centered">Bienvenido  <br /><b>@Session["UserEmail"]</b></h1>
+            <br />
+
+            <h1 class="subtitle is-4 has-text-centered">¿Qué desea hacer?</h1>
+            <div class="columns">
+                <div class="column">
+                    @Html.ActionLink("Agregar Contacto", "create", "Agenda", null, new { @class = "button is-primary is-fullwidth" })
+                </div>
+                <div class="column">
+                    @Html.ActionLink("Ver Contactos", "verAgenda", "Agenda", null, new { @class = "button is-info is-fullwidth" })
+                </div>
+            </div>
+            <hr />
+            @for (int i = 0; i < total; i++)
+            {
+                <div class="columns">
+                    @for (int q = 0; q < split; q++)
+                    {
+                        int current = (i * split) + q;
+                        if (current > Model.Count() - 1)
+                        {
+                            <div class="column"></div>
+                            continue;
+                        }
+                        <div class="column">
+                            <div class="card">
+                                <div class="card-content">
+                                    <p class="title is-size-5 has-text-centered">Contacto</p>
+                                    <p class="subtitle has-text-centered">
+                                        @Model.ElementAt(current).nombreContacto
+                                    </p>
+                                </div>
+                                <footer class="card-footer">
+                                    <p class="card-footer-item">
+                                        @Html.ActionLink("Detalles", "Details", "Agenda" , new { id = Model.ElementAt(current).id },null)
+                                    </p>
+                                    <p class="card-footer-item">
+                                        @Html.ActionLink("Eliminar", "Delete", "Agenda", new { id = Model.ElementAt(current).id }, null)
+                                    </p>
+                                </footer>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+
+    }
+</div>
+@*<div class="jumbotron">
+        <h1>Agenda de Contactos</h1>
+        <p class="lead">En esta agenda puede dar mantenimiento a sus contactos</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Message</h2>
+            <p>
+                #messagge
+            </p>
+        </div>
+    </div>*@

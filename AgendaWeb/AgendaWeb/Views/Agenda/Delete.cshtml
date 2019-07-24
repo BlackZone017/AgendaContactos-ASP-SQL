@@ -1,0 +1,77 @@
+﻿@model AgendaWeb.Models.Agenda
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="container">
+    <section class="section">
+        <div class="notification is-danger">
+            <h2>Eliminar Contacto</h2>
+            <h3>Seguro que quiere borrar <b>este Contacto</b>?</h3>
+
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                <div>
+                    <hr />
+
+                    <!--Contacto -->
+                    <div class="field">
+                        <p class="title is-size-4 ">Contacto</p>
+                    </div>
+                    <div class="field is-size-5">
+                        @Html.DisplayFor(model => model.nombreContacto)
+                    </div>
+
+                    <!--Telefono -->
+                    <div class="field">
+                        <p class="title is-size-4 ">Telefono</p>
+                    </div>
+                    <div class="field is-size-5">
+                        @Html.DisplayFor(model => model.telefono)
+                    </div>
+
+                    <!--Mail -->
+                    <div class="field">
+                        <p class="title is-size-4 ">Correo</p>
+                    </div>
+                    <div class="field is-size-5">
+                        @Html.DisplayFor(model => model.email)
+                    </div>
+
+                    <!--Direccion -->
+                    <div class="field">
+                        <p class="title is-size-4 ">Direccion</p>
+                    </div>
+                    <div class="field is-size-5">
+                        @Html.DisplayFor(model => model.direccion)
+                    </div>
+
+                    <br />
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="columns is-centered">
+                        <div class="column is-one-third">
+                            <input type="submit" value="Borrar" class="button is-danger is-fullwidth" />
+                        </div>
+                        <div class="column is-one-third">
+                            @Html.ActionLink("Volver a lista", "verAgenda", null, new { @class = "button is-fullwidth" })
+                        </div>
+                    </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+            
+                
+
+                

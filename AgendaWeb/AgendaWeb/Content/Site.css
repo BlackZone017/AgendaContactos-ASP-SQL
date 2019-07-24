@@ -1,0 +1,14 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+@media print {
+    .print {
+        display: none;
+    }
+}
+
+td:first-letter, th:first-letter {
+    text-transform: uppercase;
+}

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<AgendaWeb.Models.Agenda>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    
+    @if (ViewBag.enviado != null)
+    {
+        <div class="notification is-success">
+            @ViewBag.enviado
+        </div>
+
+    }
+
+    @if (ViewBag.Error == null)
+    {
+        <h1 class="title is-3">Contactos de <b> @Session["UserEmail"]</b></h1> <br />
+
+        using (Html.BeginForm("Index", "Agenda", FormMethod.Post))
+        {
+            <div class="columns">
+                <div class="column">
+                    @Html.ActionLink("Agregar Contacto", "Create", null, new { @class = "button is-success" }) <span> </span>
+                </div>
+                <div class="column">
+                    @Html.TextBox("nombreContacto", null, htmlAttributes: new { @class = "input is-rounded", @placeholder = "Buscar Contacto por nombre" })
+                    @*<input class="input is-rounded" type="text" placeholder="Buscar Contacto por nombre"><span> </span>*@
+                </div>
+                <div class="column">
+                    <input type="submit" value="Buscar" class="button is-primary is-rounded" /><span> </span>
+                    @Html.ActionLink("Buscar Todos", "verAgenda", null, new { @class = "button is-info is-rounded" }) <span> </span>
+                </div>
+            </div>
+        }
+
+
+
+        <div class="columns">
+            <div class="column">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombreContacto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.telefono)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.direccion)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombreContacto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefono)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.direccion)
+                            </td>
+                            <td>
+                                <div class="field has-addons">
+                                    <p class="control">
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.id }, new { @class = "button is-outlined is-success" })
+                                    </p>
+                                    <p class="control">
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.id }, new { @class = "button is-outlined is-info" })
+                                    </p>
+                                    <p class="control">
+                                        @Html.ActionLink("Borrar", "Delete", new { id = item.id }, new { @class = "button is-outlined is-danger" })
+                                    </p>
+                                    <p class="control">
+                                        @Html.ActionLink("Enviar Mensaje", "enviarMensaje", "Agenda", new { id = item.id }, new { @class = "button is-outlined is-link" })
+                                    </p>
+
+                                    @*<p class="control">
+                                        @Html.ActionLink("Ver estas asignaciones", "verAsignaciones", "Asignaciones", new { mid = item.id }, null, new { @class = "button is-outlined is-danger" })
+                                        </p>*@
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="notification is-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+</div>
+
+
+

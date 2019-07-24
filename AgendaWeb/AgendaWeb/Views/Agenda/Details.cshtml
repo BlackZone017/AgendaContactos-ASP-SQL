@@ -1,0 +1,69 @@
+﻿@model AgendaWeb.Models.Agenda
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+        <section class="section">
+            <div class="columns is-centered">
+                <div class="column is-one-third">
+                    <h2 class="title has-text-centered">Detalles</h2>
+
+                    <div>
+                        <h4 class="title is-4 has-text-centered">@Model.nombreContacto</h4>
+                        <hr />
+
+                        <dl class="dl-horizontal">
+                            <!--Contacto-->
+                            <dt>
+                                @Html.Label("Contacto ", htmlAttributes: new { @class = "label" })
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.nombreContacto)
+                            </dd>
+                            <br />
+
+                            <!--Telefono-->
+                            <dt>
+                                @Html.Label("Telefono ", htmlAttributes: new { @class = "label" })
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.telefono)
+                            </dd>
+                            <br />
+
+                            <!--Correo-->
+                            <dt>
+                                @Html.Label("Correo ", htmlAttributes: new { @class = "label" })
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.email)
+                            </dd>
+                            <br />
+
+                            <!--Direccion-->
+                            <dt>
+                                @Html.Label("Direccion ", htmlAttributes: new { @class = "label" })
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.direccion)
+                            </dd>
+                            <br />
+                        </dl>
+                    </div>
+
+                    <div class="columns">
+                        <div class="column">
+                            @Html.ActionLink("Volver  ", "verAgenda", null, new { @class = "button is-info is-fullwidth" })
+                        </div>
+                        <div class="column">
+                            @Html.ActionLink("Editar", "Edit", new { id = Model.id }, htmlAttributes: new { @class = "button is-warning is-fullwidth" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+

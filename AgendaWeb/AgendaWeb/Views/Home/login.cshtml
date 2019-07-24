@@ -1,0 +1,84 @@
+﻿@model AgendaWeb.Models.Usuario
+
+
+@{
+    ViewBag.Title = "login";
+}
+
+
+
+<div class="container">
+    <section class="section">
+        @if (ViewBag.Error != null)
+        {
+            <div class="notification is-danger">
+                @ViewBag.Error
+            </div>
+        }
+
+        @if (ViewBag.notificacion != null)
+        {
+            <div class="notification is-success">
+                @ViewBag.notificacion
+            </div>
+        }
+
+        @if (Session["UserEmail"] == null)
+        {
+            <div class="columns is-centered">
+                <div class="column is-one-third ">
+
+                    <div class="card">
+                        <div class="has-background-primary">
+                            <p class="title has-text-white" style="padding:30px;">Login</p>
+                        </div>
+                        @using (Html.BeginForm("login", "home", FormMethod.Post))
+                        {
+                            <div class="card-content">
+                                <div class="field">
+                                    @Html.Label("Email", new { @class = "label", })
+                                    <div class="control">
+                                        @Html.EditorFor(Model => Model.usuario1, new { htmlAttributes = new { @class = "input", @type = "email" } })
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    @Html.Label("Contraseña", new { @class = "label" })
+                                    <div class="control">
+                                        @Html.EditorFor(Model => Model.password, new { htmlAttributes = new { @class = "input", @type = "password" } })
+                                    </div>
+                                </div>
+
+
+                                <div class="field">
+                                    <div class="columns">
+                                        <div class="column">
+                                            <div class="control">
+                                                <button value="submit" name="submit" class="button is-primary is-fullwidth">Iniciar Sesion</button>
+
+                                            </div>
+                                        </div>
+                                        <div class="column">
+                                            <div class="control">
+                                                @Html.ActionLink("Registrarse", "registrarse", null, new { @class = "button is-fullwidth" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            <footer class="card-footer"></footer>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        }
+    </section>
+
+</div>
+
+
